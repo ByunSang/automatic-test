@@ -1,0 +1,26 @@
+services:
+  sip-server49:
+    environment:
+      - SERVER_IP=4.4.49.1
+      - CLIENT_IP=3.3.49.1
+    image: 192.168.83.9:30443/test/ubuntu_base
+    volumes:
+      - ./scenarios:/home/scenarios
+    stdin_open: true
+    tty: true
+    restart: always
+    privileged: true
+    container_name: sip-server49
+    networks:
+      wnet:
+        ipv4_address: 4.4.49.1
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "5060:5060/udp"
+    entrypoint: sh -c "/home/scenarios/entrypoint.sh"
+networks:
+  wnet:
+    external:
+      name: wnet
+
