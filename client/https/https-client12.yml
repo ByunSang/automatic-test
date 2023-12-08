@@ -1,0 +1,23 @@
+services:
+  https-client12:
+    environment:
+      - SERVER_IP1=4.4.12.1
+    image: 192.168.83.9:30443/test/ubuntu_base
+    command: sh -c /home/tls_test_server/run_ssl.sh
+    volumes:
+      - ./tls_test_client:/home/tls_test_server
+    stdin_open: true
+    tty: true
+    restart: always
+    privileged: true
+    container_name: https-client12
+    cap_add:
+      - NET_ADMIN
+    networks:
+      wnet:
+        ipv4_address: 3.3.12.1
+networks:
+  wnet:
+    external:
+      name: wnet
+

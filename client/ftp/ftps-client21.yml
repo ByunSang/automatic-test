@@ -1,0 +1,34 @@
+services:
+  ftps-client21:
+    environment:
+      - BASE_IP=3.3.21.1
+      - IP_COUNT=1
+      - IP_CIDR=16
+      - INTERFACE_NAME=eth0
+      - ROUTE_DST=default
+      - FTP_SERVER_PORT=21
+      - FTP_SERVER_IP1=4.4.21.1
+      - FTP_SERVER_IP2=4.4.21.2
+      - FTP_SERVER_IP3=4.4.21.3
+      - FTP_SERVER_IP4=4.4.21.4
+      - FTP_SERVER_IP5=4.4.21.5
+      - FTP_SERVER_IP6=4.4.21.6
+      - FTP_SERVER_IP7=4.4.21.7
+      - FTP_SERVER_IP8=4.4.21.8
+      - FTP_SERVER_IP9=4.4.21.9
+      - FTP_SERVER_IP10=4.4.21.10
+    image: 192.168.83.9:30443/test/ftpd-client
+    command: sh -c "/entrypoint.sh"
+    stdin_open: true
+    tty: true
+    restart: always
+    privileged: true
+    container_name: ftps-client21
+    networks:
+      wnet:
+        ipv4_address: 3.3.21.1
+networks:
+  wnet:
+    external:
+      name: wnet
+

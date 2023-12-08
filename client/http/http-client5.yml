@@ -1,0 +1,19 @@
+services:
+  http-client5:
+    environment:
+      - BASE_IP=4.4.5.1
+    image: 192.168.83.9:30443/test/http-client
+    command: sh -c "/home/ip.sh"
+    stdin_open: true
+    tty: true
+    restart: always
+    privileged: true
+    container_name: http-client5
+    networks:
+      wnet:
+        ipv4_address: 3.3.5.1
+networks:
+  wnet:
+    external:
+      name: wnet
+

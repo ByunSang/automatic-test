@@ -1,0 +1,25 @@
+services:
+  sip-client50:
+    environment:
+      - SERVER_IP1=4.4.50.1
+    image: 192.168.83.9:30443/test/ubuntu_base
+    volumes:
+      - ./scenarios:/home/scenarios
+    stdin_open: true
+    tty: true
+    restart: always
+    privileged: true
+    container_name: sip-client50
+    cap_add:
+      - NET_ADMIN
+    networks:
+      wnet:
+        ipv4_address: 3.3.50.1
+    ports:
+      - "5060:5060/udp"
+    command: "sipp -s s -sf /home/scenarios/sipp-scenarios-master/sipp_uac_basic.xml -p 5060 -i 3.3.50.1 4.4.50.1 -nr -rp 1000"
+networks:
+  wnet:
+    external:
+      name: wnet
+
